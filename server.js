@@ -14,7 +14,7 @@ app.use(function(request,response,next) {
 app.get('/',function(request,response)
         {
     
-    response.render('index',{title:'Weather App!'}) ;
+    response.render('index',{title:'Weather App!',para:'Testing heroku'}) ;
 }) ;
 
 app.listen(port_num,function()
