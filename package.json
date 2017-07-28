@@ -1,0 +1,20 @@
+{
+  "name": "weatherapp",
+  "version": "1.0.0",
+  "description": "Sample Project in NodeJS",
+  "main": "server.js",
+  "scripts": {
+    "test": "console.log(''\u001b[DWeatherapp in Node!')",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "WeatherApp"
+  },
+  "author": "Hrishikesh Deshpande",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.3",
+    "hbs": "^4.0.1"
+  }
+}
