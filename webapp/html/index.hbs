@@ -1,8 +1,64 @@
 <!DOCTYPE>
 <head>
-    <title>Weather App</title>
+    <title>Weather Node</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+     
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 </head>
-<body>
-<h1>{{title}}</h1>
-    <p>{{para}}</p>
-</body>
+
+<style>
+    input[placeholder] {
+text-align:center ;
+    }
+</style>
+
+<script>
+var app = angular.module('weatherNode',[]) ;
+    app.controller('weatherNodeCtrl',function($scope,$http) 
+                   {
+        $scope.showWeather = false ;
+        $scope.currentTemp = 0 ;
+        $scope.formattedAddress = '' ;
+$scope.getWeather = function() {
+    if($scope.location !== ''){
+    $http.get('/getWeather?address=' + encodeURIComponent($scope.location)).then(function(response) {
+        if(response.data.successFlag === 1) {
+            debugger ;
+            $scope.showWeather = true ;
+            console.log(response) ;
+            $scope.currentTemp = response.data.data.weather.currently.temperature ;
+            $scope.formattedAddress = response.data.data.formattedAddress ;
+        }else{
+            alert(response.data.data) ;
+        }
+    }) ;
+}else{
+    alert('please enter address!')
+}
+    }
+    }) ;
+</script> 
+<body ng-app="weatherNode" ng-controller="weatherNodeCtrl">
+    <div style="text-align:center;"> 
+        <h1>Weather Node</h1>
+        <p>Powered by Dark Sky</p>
+    </div>
+    <div>
+        <div align="center">
+    <input class="form-control" ng-model="location" style="width:65%" type="text" placeholder="Enter Address"/>
+    </div>
+        <div align="center" style="margin-top:1%">
+            <button class="btn btn-default" type="submit" ng-click="getWeather()">Get Weather!</button>
+        </div>
+</div>
+    <div ng-show="showWeather" align="center">
+    <div class="row">
+        <div class="col-md-6">
+        <p ng-bind="currentTemp"></p>
+        </div>
+        <div class="col-md-6">
+        <p ng-bind="formattedAddress"></p>
+        </div>
+    </div>
+    </div>
+        </body>
