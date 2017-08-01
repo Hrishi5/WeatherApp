@@ -15,7 +15,7 @@ module.exports.getWeather = function(lat,long,callback) {
 module.exports.getLocation = function(address,callback) {
     if(address !== null && address !== undefined && address.trim() !== '') {
     request(
-    'http://maps.googleapis.com/maps/api/geocode/json?address='+encodeURIComponent(address),function(error,response,body) {
+    'https://maps.googleapis.com/maps/api/geocode/json?address='+encodeURIComponent(address),function(error,response,body) {
         var parsedBody = JSON.parse(body) ;
         if(parsedBody.status.toLowerCase() === 'ok' ) {
         callback(
